@@ -1,7 +1,12 @@
+import { createModalContent } from "./createModalContent";
 import { createPostsList } from "./functions/createPostsList";
+import { parseTrString } from "./functions/parseTrString";
 
 export function createPostTable(data: any, app: HTMLElement) {
   const postsList = createPostsList(data);
+  const languages = data.languages;
+  const defaultLanguage = data.default_language;
+
   // data is an object {languages: string[], default_language: string, page: any[], post: any[] .... other custom post types}
   // 1. Create a table element with bootstrap classes
   const table = document.createElement("table");
@@ -18,7 +23,7 @@ export function createPostTable(data: any, app: HTMLElement) {
   const tr = document.createElement("tr");
   thead.appendChild(tr);
   // 4. Create th elements for the table headings
-  const headings = ["ID", "Type", "Title", "Language", "Actions"];
+  const headings = ["ID", "Type", "Title", "Actions"];
 
   headings.forEach((heading) => {
     const th = document.createElement("th");
@@ -40,15 +45,18 @@ export function createPostTable(data: any, app: HTMLElement) {
     td2.textContent = post.type;
     tr.appendChild(td2);
     const td3 = document.createElement("td");
-    td3.textContent = post.title;
+    td3.textContent = parseTrString(post.title, defaultLanguage)[defaultLanguage];
     tr.appendChild(td3);
-    const td4 = document.createElement("td");
-    td4.textContent = "to do";
-    tr.appendChild(td4);
     const td5 = document.createElement("td");
     const editBtn = document.createElement("button");
     editBtn.classList.add("btn", "btn-primary", "btn-sm");
     editBtn.textContent = "Translate";
+    editBtn.setAttribute("data-bs-toggle", "modal");
+    editBtn.setAttribute("data-bs-target", "#trModal");
+
+    editBtn.onclick = () => {
+      createModalContent(post, languages, defaultLanguage);
+    };
     td5.appendChild(editBtn);
     tr.appendChild(td5);
   });
