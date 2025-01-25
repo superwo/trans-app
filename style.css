@@ -1,0 +1,18 @@
+/*
+Theme Name: ar-translate
+Theme URI: http://underscores.me/
+Description: Wordpress Theme rapid development
+Author: anonymous
+Requires at least: 5.3
+Tested up to: 6.0.2
+Requires PHP: 7.4
+Version: 0.4
+*/
+
+
+.mfp-container .mfp-arrow::before {
+  background: url("assets/i/static/gallery-right-black.svg") no-repeat center;
+}
+.mfp-container .mfp-arrow:hover:before {
+  background: url("assets/i/static/gallery-right-white.svg") no-repeat center;
+}

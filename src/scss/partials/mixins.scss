@@ -1,0 +1,110 @@
+@mixin reset-list() {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+@mixin size($number) {
+    width: $number;
+    height: $number;
+}
+
+@mixin placeholder-input($color, $text-align) {
+    &[type="text"]::-webkit-input-placeholder,
+    &[type="email"]::-webkit-input-placeholder,
+    &[type="tel"]::-webkit-input-placeholder {
+        text-align: $text-align;
+        color: $color;
+    }
+
+    &[type="text"]::-moz-placeholder,
+    &[type="email"]::-moz-placeholder,
+    &[type="tel"]::-moz-placeholder {
+        text-align: $text-align;
+        color: $color;
+    }
+
+    /* webkit */
+    &[type="text"]:-moz-placeholder,
+    &[type="email"]:-moz-placeholder,
+    &[type="tel"]:-moz-placeholder {
+        text-align: $text-align;
+        color: $color;
+    }
+
+    /* webkit */
+    &[type="text"]:-ms-input-placeholder,
+    &[type="email"]:-ms-input-placeholder,
+    &[type="tel"]:-ms-input-placeholder {
+        text-align: $text-align;
+        color: $color;
+    }
+}
+
+@mixin placeholder-textarea($color, $text-align) {
+    &::-webkit-input-placeholder {
+        text-align: $text-align;
+        color: $color;
+    }
+
+    /* webkit */
+    &::-moz-placeholder {
+        text-align: $text-align;
+        color: $color;
+    }
+
+    /* webkit */
+    &:-moz-placeholder {
+        text-align: $text-align;
+        color: $color;
+    }
+
+    /* webkit */
+    &:-ms-input-placeholder {
+        text-align: $text-align;
+        color: $color;
+    }
+}
+
+// Grids
+@mixin gridCards($type: fit, $min: 280px, $max: 1fr, $gap: 30px) {
+    display: grid;
+    gap: $gap;
+    grid-template-columns: repeat(auto-#{$type}, minmax($min, $max));
+}
+
+@function lh($fontSize, $lineHeight) {
+    @return $lineHeight / $fontSize;
+}
+
+
+// @include gradient-border(#dbe3ee, #194d93, 1px, "to bottom");
+
+@mixin gradient-border($color1, $color2, $border-width, $direction) {
+  border: none;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(#{$direction}, $color1 0%, $color2 100%), linear-gradient(#{$direction}, $color1 0%, $color2 100%);
+  @if $direction == 'to right' or $direction == 'to left' {
+    @if $direction == 'to right' {
+      border-left: $border-width solid $color1;
+      border-right: $border-width solid $color2;
+    } @else {
+      border-left: $border-width solid $color2;
+      border-right: $border-width solid $color1;
+    }
+    background-position: 0 0, 0 100%;
+    background-size: 100% $border-width;
+  }
+  
+  @if $direction == 'to top' or $direction == 'to bottom' {
+    @if $direction == 'to top' {
+      border-top: $border-width solid $color2;
+      border-bottom: $border-width solid $color1;
+    } @else {
+      border-top: $border-width solid $color1;
+      border-bottom: $border-width solid $color2;
+    }
+    background-position: 0 0, 100% 0;
+    background-size: $border-width 100%;
+  }
+}

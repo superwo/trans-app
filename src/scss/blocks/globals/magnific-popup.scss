@@ -1,0 +1,182 @@
+/* overlay at start */
+.mfp-fade.mfp-bg {
+  opacity: 0;
+
+  -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
+}
+/* overlay animate in */
+.mfp-fade.mfp-bg.mfp-ready {
+  opacity: 0.8;
+}
+/* overlay animate out */
+.mfp-fade.mfp-bg.mfp-removing {
+  opacity: 0;
+}
+
+/* content at start */
+.mfp-fade.mfp-wrap .mfp-content {
+  opacity: 0;
+
+  -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
+}
+/* content animate it */
+.mfp-fade.mfp-wrap.mfp-ready .mfp-content {
+  opacity: 1;
+}
+/* content animate out */
+.mfp-fade.mfp-wrap.mfp-removing .mfp-content {
+  opacity: 0;
+}
+
+.mfp-with-zoom .mfp-container,
+.mfp-with-zoom.mfp-bg {
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+  /* ideally, transition speed should match zoom duration */
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.mfp-container {
+  background: rgba(0, 0, 0, 0.9);
+}
+.mfp-with-zoom.mfp-ready .mfp-container {
+  opacity: 1;
+}
+.mfp-with-zoom.mfp-ready.mfp-bg {
+  opacity: 0.8;
+}
+
+.mfp-with-zoom.mfp-removing .mfp-container,
+.mfp-with-zoom.mfp-removing.mfp-bg {
+  opacity: 0;
+}
+
+/* overlay at start */
+.mfp-fade.mfp-bg {
+  opacity: 0;
+  -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
+}
+/* overlay animate in */
+.mfp-fade.mfp-bg.mfp-ready {
+  opacity: 0.8;
+}
+/* overlay animate out */
+.mfp-fade.mfp-bg.mfp-removing {
+  opacity: 0;
+}
+/* content at start */
+.mfp-fade.mfp-wrap .mfp-content {
+  opacity: 0;
+  -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
+}
+/* content animate it */
+.mfp-fade.mfp-wrap.mfp-ready .mfp-content {
+  opacity: 1;
+}
+/* content animate out */
+.mfp-fade.mfp-wrap.mfp-removing .mfp-content {
+  opacity: 0;
+}
+.mfp-with-zoom .mfp-container,
+.mfp-with-zoom.mfp-bg {
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+  /* ideally, transition speed should match zoom duration */
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.mfp-with-zoom.mfp-ready .mfp-container {
+  opacity: 1;
+}
+.mfp-with-zoom.mfp-ready.mfp-bg {
+  opacity: 0.8;
+}
+.mfp-with-zoom.mfp-removing .mfp-container,
+.mfp-with-zoom.mfp-removing.mfp-bg {
+  opacity: 0;
+}
+.mfp-close {
+  top: 1rem !important;
+  right: -6rem !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 4.8rem !important;
+  height: 4.8rem !important;
+  line-height: initial !important;
+  background: #e8b559 !important;
+  border-radius: 50% !important;
+  @media screen and (max-width: 1460px) {
+    right: 4px !important;
+  }
+  @media screen and (max-width: 1200px) {
+    top: 0 !important;
+  }
+  @media screen and (max-height: 992px) {
+    top: 10px !important;
+  }
+}
+.mfp-with-zoom.mfp-ready.mfp-bg {
+  opacity: 1 !important;
+  background: rgba(0, 0, 0, 0.9) !important;
+}
+.mfp-container .mfp-arrow {
+  position: absolute !important;
+  top: initial !important;
+  left: calc(50% - 3.2rem) !important;
+  bottom: 4rem !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px !important;
+  height: 48px !important;
+  background: white;
+  border-radius: 50% !important;
+  border: none;
+  opacity: 1 !important;
+  transition: all 0.2s;
+  z-index: 2000;
+  &::after {
+    display: none;
+  }
+  &::before {
+    content: "";
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: block;
+    margin: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    border: none !important;
+  }
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  &.mfp-arrow-left {
+    left: calc(50% - 3.2rem) !important;
+    transform: rotate(180deg);
+  }
+  &.mfp-arrow-right {
+    left: calc(50% + 3.2rem) !important;
+    transform: scale(1) !important;
+  }
+}
