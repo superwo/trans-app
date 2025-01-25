@@ -5,7 +5,7 @@ if (!defined('ABSPATH'))
     exit;
 
 $footer_page_id = 351;
-$vite_dev = true;
+$vite_dev = false;
 
 define('IS_VITE_DEVELOPMENT', $vite_dev);
 

@@ -83,3 +83,54 @@ function allContentResults($data)
 
     return $results;
 }
+function register_custom_post_update_api() {
+    register_rest_route( 'tr/v1', '/update-post', array(
+        'methods' => 'POST',
+        'callback' => 'handle_update_post',
+        'permission_callback' => '__return_true', // For demo purposes, adjust as needed for security
+    ));
+}
+
+add_action( 'rest_api_init', 'register_custom_post_update_api' );
+
+function handle_update_post( $data ) {
+    $post_data = json_decode( $data->get_body(), true );
+
+    if ( !isset( $post_data['content'] ) ) {
+        return new WP_REST_Response( 'Missing required fields', 400 );
+    }
+
+    // Parse the request body into a string format
+    $content_string = $post_data['content'];
+    
+    // Optionally: Handle decoding of the content string into a usable format
+    // In this case, we will store the string with the delimiters as it is.
+    
+    // Update Post Title and Content
+    if ( isset( $post_data['id'] ) && isset( $post_data['title'] ) ) {
+        $post_id = intval( $post_data['id'] );
+
+        // Update Post Title and Content
+        $post_update = array(
+            'ID' => $post_id,
+            'post_title' => $content_string,
+            'post_content' => $content_string,
+        );
+
+        $update_post_result = wp_update_post( $post_update );
+
+        if ( is_wp_error( $update_post_result ) ) {
+            return new WP_REST_Response( 'Failed to update post', 500 );
+        }
+    }
+
+    // Check if any custom fields are provided and update them
+    if ( isset( $post_data['custom_fields'] ) && is_array( $post_data['custom_fields'] ) ) {
+        foreach ( $post_data['custom_fields'] as $key => $value ) {
+            // Store custom fields with the raw string (using delimiters as is)
+            update_post_meta( $post_id, $key, $value );
+        }
+    }
+
+    return new WP_REST_Response( 'Post updated successfully', 200 );
+}
